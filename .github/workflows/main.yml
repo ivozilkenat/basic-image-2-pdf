@@ -15,7 +15,7 @@ jobs:
       run: make compile-no-venv
 
     - name: Zip Executable
-      run: ls && zip -r myproject.zip ./img2pdf.exe
+      run: zip -r myproject.zip ./img2pdf.exe
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
@@ -29,8 +29,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: "v1" #${{ github.ref }}
-        release_name: ${{ steps.version.outputs.version }}
+        tag_name: release-${{ github.ref_name }}-${{ github.run_number }}
+        release_name: Release for ${{ github.ref_name }} at ${{ github.run_number }}
+        #release_name: ${{ steps.version.outputs.version }}
         draft: false
         prerelease: false
         body: "Main executable release"
