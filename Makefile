@@ -23,3 +23,6 @@ compile:
 
 compile-with-console:
 	$(PYINSTALLER) $(COMMON_FLAGS) $(SCRIPT)
+
+compile-non-venv:
+	pyinstaller $(COMMON_FLAGS) --noconsole $(SCRIPT)
