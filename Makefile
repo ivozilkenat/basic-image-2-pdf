@@ -7,7 +7,7 @@ PYINSTALLER = ./venv/Scripts/pyinstaller
 SITE_PACKAGES = ./venv/Lib/site-packages
 
 # Output directory
-DISTPATH = ./out
+DISTPATH = ./compiled
 
 # Name of the output executable
 EXECUTABLE_NAME = img2pdf.exe
@@ -16,14 +16,14 @@ EXECUTABLE_NAME = img2pdf.exe
 SCRIPT = main.py
 
 # Common PyInstaller flags
-COMMON_FLAGS = --onefile --paths $(SITE_PACKAGES) --name $(EXECUTABLE_NAME)
+COMMON_FLAGS = --onefile --paths $(SITE_PACKAGES) --distpath $(DISTPATH) --name $(EXECUTABLE_NAME)
 
 compile:
-	$(PYINSTALLER) $(COMMON_FLAGS) --noconsole --distpath $(DISTPATH) $(SCRIPT)
+	$(PYINSTALLER) $(COMMON_FLAGS) --noconsole $(SCRIPT)
 
 compile-with-console:
-	$(PYINSTALLER) $(COMMON_FLAGS) --distpath $(DISTPATH) $(SCRIPT)
+	$(PYINSTALLER) $(COMMON_FLAGS)  $(SCRIPT)
 
 compile-no-venv:
 	pip install -r requirements.txt
-	pyinstaller $(COMMON_FLAGS) --noconsole --distpath . $(SCRIPT)
+	pyinstaller $(COMMON_FLAGS) --noconsole $(SCRIPT)
