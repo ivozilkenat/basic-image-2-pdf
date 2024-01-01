@@ -26,4 +26,4 @@ compile-with-console:
 
 compile-no-venv:
 	pip install -r requirements.txt
-	pyinstaller $(COMMON_FLAGS) --noconsole $(SCRIPT)
+	pyinstaller $(COMMON_FLAGS) --noconsole --distpath . $(SCRIPT)
