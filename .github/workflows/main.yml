@@ -30,11 +30,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: Release ${{ github.ref }} #${{ steps.version.outputs.version }}
         draft: false
         prerelease: false
         body: "Description of the release"
-        commitish: ${{ github.sha }}
 
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
