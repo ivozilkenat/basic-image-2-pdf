@@ -15,7 +15,7 @@ jobs:
       run: make compile-no-venv
 
     - name: Zip Executable
-      run: zip -r myproject.zip ./img2pdf.exe
+      run: zip -r myproject.zip ./compiled/img2pdf.exe
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
