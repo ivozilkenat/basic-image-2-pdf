@@ -15,7 +15,7 @@ jobs:
       run: make compile-no-venv
 
     - name: Zip Executable
-      run: zip -r myproject.zip ./compiled/img2pdf.exe
+      run: Compress-Archive -Path ./compiled/img2pdf.exe -DestinationPath ./myproject.zip -Recurse
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
