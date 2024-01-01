@@ -25,4 +25,5 @@ compile-with-console:
 	$(PYINSTALLER) $(COMMON_FLAGS) $(SCRIPT)
 
 compile-non-venv:
+	pip install -r requirements.txt
 	pyinstaller $(COMMON_FLAGS) --noconsole $(SCRIPT)
