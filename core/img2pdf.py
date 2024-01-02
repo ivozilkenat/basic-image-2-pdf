@@ -111,7 +111,11 @@ class IMG2PDF:
 
     def create_pdf(self, update_progress_callback):
         print("Starte PDF Generierung")
+        print("Starte Kategorie-Erfassung")
+
         image_categories = self.get_categories()
+
+        print("Kategorie-Erfassung abgeschlossen")
 
         self.builder.add_page(
             PDFBuilder.add_cover_letter
@@ -132,6 +136,8 @@ class IMG2PDF:
             image_count_finished = self.builder.add_page(
                 category.add_to_pdf(image_count_finished, image_count_total, update_progress_callback), new_page=False
             )
+
+        update_progress_callback(100)
 
         print("PDF speichert ...")
         self.builder.save()

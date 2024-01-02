@@ -28,6 +28,7 @@ class IMG2PDFApplication:
     def __init__(self):
         self.window = None
         self.entry_function = IMG2PDF.run_img2pdf
+        self.script_running = False
 
         self._build()
         self._setup_redirect()
@@ -38,6 +39,12 @@ class IMG2PDFApplication:
 
     def run_script(self, dir_path_entry, dir_target_path_entry, output_name_entry, update_progress_callback):
         def __inner(*args, **kwargs):
+            if self.script_running:
+                print("Programm wird bereits ausgeführt!")
+                return
+
+            self.script_running = True
+
             dir_path = dir_path_entry.get()
             output_dir = dir_target_path_entry.get()
             output_name = output_name_entry.get()
@@ -46,6 +53,8 @@ class IMG2PDFApplication:
                 return
             # Assuming main.py has a function named 'process_file' that takes dir_path and output_name
             self.entry_function(dir_path, output_path, update_progress_callback)
+
+            self.script_running = False
         return __inner
 
     def valid_args(self, dir_path, output_dir, output_name):
