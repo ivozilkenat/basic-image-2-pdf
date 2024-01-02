@@ -14,14 +14,14 @@ jobs:
     - name: Build Project
       run: make compile-no-venv
 
-    # - name: Zip Executable
-    #   run: Compress-Archive -Path ./compiled/img2pdf.exe -DestinationPath ./myproject.zip 
+    - name: Zip Executable
+      run: Compress-Archive -Path ./compiled/img2pdf.exe -DestinationPath ./myproject.zip 
 
-    # - name: Upload Artifact
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: MyProjectExecutable
-    #     path: myproject.zip
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: MyProjectExecutable
+        path: myproject.zip
 
     - name: Create Release
       id: create_release
@@ -36,22 +36,22 @@ jobs:
         prerelease: false
         body: "Main executable release"
 
-    # - name: Upload Release Asset
-    #   uses: actions/upload-release-asset@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-    #     asset_path: ./myproject.zip
-    #     asset_name: project.zip
-    #     asset_content_type: application/zip
-
-    - name: Upload Release Asset (EXE)
+    - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./compiled/img2pdf.exe
-        asset_name: img2pdf.exe
-        asset_content_type: application/exe
+        asset_path: ./myproject.zip
+        asset_name: project.zip
+        asset_content_type: application/zip
+
+    # - name: Upload Release Asset (EXE)
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: ./compiled/img2pdf.exe
+    #     asset_name: img2pdf.exe
+    #     asset_content_type: application/exe
